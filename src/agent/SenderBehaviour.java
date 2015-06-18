@@ -39,7 +39,7 @@ public class SenderBehaviour extends Behaviour{
 		try {
 			Thread.sleep(15000);
 		} catch (InterruptedException e1) {
-			
+
 			e1.printStackTrace();
 		}
 
@@ -54,7 +54,7 @@ public class SenderBehaviour extends Behaviour{
 		Marker marker = new Marker();
 
 		marker.coordinates = new double[]{39.833798, -0.201700};
-		marker.name = "Test";
+		marker.name = "Regular marker";
 		marker.information = "Hello, I am only a <b>test</b> marker. <br> I do like <h1>HTML</h1>";
 
 		//Set the object to send
@@ -66,7 +66,7 @@ public class SenderBehaviour extends Behaviour{
 			System.out.println("Error trying to serialize the object.");
 			e.printStackTrace();
 		}
-		
+
 		//Sets the agent to send by name
 		message.addReceiver( new AID( "GUI", AID.ISLOCALNAME) );
 
@@ -79,10 +79,93 @@ public class SenderBehaviour extends Behaviour{
 		if(receivedMessage != null){
 
 			String ontology = receivedMessage.getOntology();
-			
+
 			System.out.println("The API server replied with: " + ontology);
 		}
 
+		//Police marker
+
+		//Prepare the message
+		message = new ACLMessage(ACLMessage.INFORM);
+
+		//The Ontology is used to choose the function.
+		message.setOntology("drawMarker");
+
+		marker = new Marker();
+
+		marker.coordinates = new double[]{39.956991, -0.165349};
+		marker.name = "Police";
+		marker.information = "To serve and protect.";
+		marker.icon = "https://raw.githubusercontent.com/AiAUJI/MapsGUI/master/src/icon/police.png";
+
+		//Set the object to send
+		try {
+
+			message.setContentObject(marker);
+		} catch (IOException e) {
+
+			System.out.println("Error trying to serialize the object.");
+			e.printStackTrace();
+		}
+
+		//Sets the agent to send by name
+		message.addReceiver( new AID( "GUI", AID.ISLOCALNAME) );
+
+		//Actually send it
+		this.agent.send(message);
+
+		//Wait for the API server response
+		receivedMessage = this.agent.blockingReceive();
+
+		if(receivedMessage != null){
+
+			String ontology = receivedMessage.getOntology();
+
+			System.out.println("The API server replied with: " + ontology);
+		}
+
+		//Ambulance marker
+
+		//Prepare the message
+		message = new ACLMessage(ACLMessage.INFORM);
+
+		//The Ontology is used to choose the function.
+		message.setOntology("drawMarker");
+
+		marker = new Marker();
+
+		marker.coordinates = new double[]{40.039723, -0.062782};
+		marker.name = "Regular marker";
+		marker.information = "Hello, I am only a <b>test</b> marker. <br> I do like <h1>HTML</h1>";
+		marker.icon = "https://raw.githubusercontent.com/AiAUJI/MapsGUI/master/src/icon/Untitled.png";
+
+		//Set the object to send
+		try {
+
+			message.setContentObject(marker);
+		} catch (IOException e) {
+
+			System.out.println("Error trying to serialize the object.");
+			e.printStackTrace();
+		}
+
+		//Sets the agent to send by name
+		message.addReceiver( new AID( "GUI", AID.ISLOCALNAME) );
+
+		//Actually send it
+		this.agent.send(message);
+
+		//Wait for the API server response
+		receivedMessage = this.agent.blockingReceive();
+
+		if(receivedMessage != null){
+
+			String ontology = receivedMessage.getOntology();
+
+			System.out.println("The API server replied with: " + ontology);
+		}
+
+		//ROUTE
 		//Prepare the message
 		message = new ACLMessage(ACLMessage.INFORM);
 
@@ -116,7 +199,7 @@ public class SenderBehaviour extends Behaviour{
 
 		//Sets the agent to send by name
 		message.addReceiver( new AID( "GUI", AID.ISLOCALNAME) );
-		
+
 		//Actually send it
 		this.agent.send(message);
 
@@ -127,7 +210,7 @@ public class SenderBehaviour extends Behaviour{
 		if(receivedMessage != null){
 
 			String ontology = receivedMessage.getOntology();
-			
+
 			System.out.println("The API server replied with: " + ontology);
 		}
 
@@ -138,7 +221,7 @@ public class SenderBehaviour extends Behaviour{
 		message.setOntology("drawPolyline");
 
 		coordinates = new ArrayList<double[]>();
-		
+
 		//This draws a Sierpinski triangle
 		coordinates.add(new double[]{39.97,-0.064});
 		coordinates.add(new double[]{39.97, -0.044});
@@ -149,7 +232,7 @@ public class SenderBehaviour extends Behaviour{
 		coordinates.add(new double[]{39.99, -0.054});
 		coordinates.add(new double[]{39.98, -0.049});
 		coordinates.add(new double[]{39.98, -0.059});
-		
+
 		Polyline polyline = new Polyline(coordinates);
 
 		//Set the object to send
@@ -167,14 +250,14 @@ public class SenderBehaviour extends Behaviour{
 
 		//Actually send it
 		this.agent.send(message);
-		
+
 		//Wait for the API server response
 		receivedMessage = this.agent.blockingReceive();
 
 		if(receivedMessage != null){
 
 			String ontology = receivedMessage.getOntology();
-			
+
 			System.out.println("The API server replied with: " + ontology);
 		}
 	}
