@@ -48,12 +48,22 @@ function drawMarker(id, coordinates, name, information, icon){
 
 	//Information to show when the marker is clicked
 	var infowindow = new google.maps.InfoWindow({
-		content: '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' + information
+		content: '<h1 id="firstHeading" class="firstHeading">' + name + '</h1></br><p>' + information + '</p></br> <button type="button" id="delete">Delete</button>'
+	});
+	
+	//Add the listener to the button in the infoWindow
+	google.maps.event.addListener(infowindow, 'domready', function() {
+	    document.getElementById("delete").addEventListener("click", function(e) {
+	    	
+	    	deleteButtonClickedCallback(id);
+	    	deleteMarker(id);
+	    });
 	});
 
-	//Add the listener
+	//Add the listener to the marker
 	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.open(map, marker);
+		markerClickedCallback(id);
 	});
 
 	//Add it to the dictionary
@@ -236,18 +246,24 @@ google.maps.event.addDomListener(window, 'load', initialize);
 function test(){
 
 	//Itinerary
-	var cv10itinerary = [[39.833798, -0.201700], [39.860272, -0.168719], [39.926379, -0.190941], [39.949556, -0.179121], [39.990981, -0.121271], [40.007006, -0.114036], [40.014712, -0.092352], [40.032196, -0.082224]];
-	drawRoute(0, cv10itinerary);
+//	var cv10itinerary = [[39.833798, -0.201700], [39.860272, -0.168719], [39.926379, -0.190941], [39.949556, -0.179121], [39.990981, -0.121271], [40.007006, -0.114036], [40.014712, -0.092352], [40.032196, -0.082224]];
+//	drawRoute(0, cv10itinerary);
+//
+//	var e15itinerary = [[39.827536, -0.140245], [39.897382, -0.130884], [39.983104, -0.097485], [40.024962, -0.032670], [40.041682, 0.023091]];
+//	drawRoute(1, e15itinerary);
+//
+//	var n340itinerary = [[39.859056, -0.168703], [39.871630, -0.143372], [39.903338, -0.117448], [39.923850, -0.105405], [39.951146, -0.085252], [39.994098, -0.089581], [40.002671, -0.075800], [40.037544, 0.030727]];
+//	drawRoute(2, n340itinerary);
+//
+//	var cs22itinerary = [[39.969558, -0.068225], [39.967494, -0.060066], [39.956184, -0.026676], [39.967977, -0.016848], [39.979819, 0.013011]];
+//	drawRoute(3, cs22itinerary);
+//
+//	var cv18itinerary = [[39.869173, -0.144927], [39.898306, -0.083645], [39.944003, -0.054709], [39.964604, -0.054440]];
+//	drawRoute(4, cv18itinerary);
+	
+	//Marker
+	drawMarker("0", [39.833798, -0.201700], "Test1", "INFO");
+	drawMarker("1", [39.860272, -0.168719], "Test2", "INFO");
+	MyFunction('Hello JxBrowser!', 1, 2, 3, true);
 
-	var e15itinerary = [[39.827536, -0.140245], [39.897382, -0.130884], [39.983104, -0.097485], [40.024962, -0.032670], [40.041682, 0.023091]];
-	drawRoute(1, e15itinerary);
-
-	var n340itinerary = [[39.859056, -0.168703], [39.871630, -0.143372], [39.903338, -0.117448], [39.923850, -0.105405], [39.951146, -0.085252], [39.994098, -0.089581], [40.002671, -0.075800], [40.037544, 0.030727]];
-	drawRoute(2, n340itinerary);
-
-	var cs22itinerary = [[39.969558, -0.068225], [39.967494, -0.060066], [39.956184, -0.026676], [39.967977, -0.016848], [39.979819, 0.013011]];
-	drawRoute(3, cs22itinerary);
-
-	var cv18itinerary = [[39.869173, -0.144927], [39.898306, -0.083645], [39.944003, -0.054709], [39.964604, -0.054440]];
-	drawRoute(4, cv18itinerary);
 }

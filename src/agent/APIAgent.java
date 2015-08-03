@@ -10,7 +10,7 @@ import controller.Controller;
 /**
  * Agent that receives messages and objects and draws them in the GUI.
  */
-public class ReceiverAgent extends Agent{
+public class APIAgent extends Agent{
 		
 	private static final long serialVersionUID = -3410239131357834599L;
 
@@ -19,6 +19,7 @@ public class ReceiverAgent extends Agent{
 		final GUI view = new GUI();
 		Controller controller = new Controller();
 		
+		//MVC stuff
 		view.setController(controller);
 		controller.setGUI(view);
 
@@ -29,6 +30,6 @@ public class ReceiverAgent extends Agent{
 			}
 		});
 					
-		addBehaviour(new ReceiverBehaviour(this, controller));		
+		addBehaviour(new APIAgentBehaviour(this, controller));
 	}
 }

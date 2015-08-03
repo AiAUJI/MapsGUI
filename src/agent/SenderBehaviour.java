@@ -135,7 +135,7 @@ public class SenderBehaviour extends Behaviour{
 		marker = new Marker();
 
 		marker.coordinates = new double[]{40.039723, -0.062782};
-		marker.name = "Regular marker";
+		marker.name = "Ambulance marker";
 		marker.information = "Hello, I am only a <b>test</b> marker. <br> I do like <h1>HTML</h1>";
 		marker.icon = "https://raw.githubusercontent.com/AiAUJI/MapsGUI/master/src/icon/Untitled.png";
 

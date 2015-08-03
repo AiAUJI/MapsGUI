@@ -5,6 +5,10 @@ import model.Marker;
 import model.Polyline;
 import model.Route;
 
+/**
+ * Manages the communication from the world to the GUI.
+ *
+ */
 public class Controller {
 
 	GUI gui;

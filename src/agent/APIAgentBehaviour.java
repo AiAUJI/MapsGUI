@@ -12,8 +12,10 @@ import jade.lang.acl.UnreadableException;
 /**
  * Behaviour that listens for messages and objects from other agents and passes
  * them to the controller to be drawn.
+ * 
+ * It also sends messages.
  */
-public class ReceiverBehaviour extends Behaviour{
+public class APIAgentBehaviour extends Behaviour{
 
 	private static final long serialVersionUID = 159994210262114748L;
 
@@ -21,7 +23,7 @@ public class ReceiverBehaviour extends Behaviour{
 	Agent agent;
 	boolean done;
 
-	public ReceiverBehaviour(Agent agent, Controller controller){
+	public APIAgentBehaviour(Agent agent, Controller controller){
 
 		super();
 

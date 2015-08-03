@@ -1,6 +1,8 @@
 package view;
 
 import com.teamdev.jxbrowser.chromium.Browser;
+import com.teamdev.jxbrowser.chromium.BrowserFunction;
+import com.teamdev.jxbrowser.chromium.JSValue;
 import com.teamdev.jxbrowser.chromium.swing.BrowserView;
 
 import controller.Controller;
@@ -19,7 +21,7 @@ import java.io.File;
 import java.io.FileReader;
 
 public class GUI {
-	
+
 	Controller controller;
 	Browser browser;
 
@@ -27,13 +29,15 @@ public class GUI {
 	 * Default constructor.
 	 */
 	public GUI(){
-		
+
 		this.controller = null;
 		this.browser = new Browser();
+
+		addCallbackFunctions(browser);
 	}
-	
+
 	public void createGUI(){
-		
+
 		BrowserView browserView = new BrowserView(browser);
 
 		//Main window
@@ -43,7 +47,7 @@ public class GUI {
 		main.setLocationRelativeTo(null);
 		main.setVisible(true);
 		main.setLayout(new BorderLayout());
-		
+
 		//Icon and title
 		ImageIcon img = new ImageIcon(GUI.class.getClassLoader().getResource("icon/ujilogo.png"));
 		main.setTitle("Universitat Jaume I");
@@ -131,58 +135,86 @@ public class GUI {
 			}
 		});
 	}
-	
+
+	/**
+	 * This method adds the functions that JS will use in order to communicate with Java.
+	 * 
+	 * @param browser Browser instance where the functions will be registered.
+	 */
+	public void addCallbackFunctions(Browser browser){
+
+		//Triggered when a marker is clicked
+		browser.registerFunction("markerClickedCallback", new BrowserFunction() {
+			public JSValue invoke(JSValue... args) {
+
+				System.out.println(args[0].getString() + " has been clicked");
+
+				return JSValue.create("ret");
+			}
+		});
+		
+		//Triggered when the delete button in a marker is clicked
+		browser.registerFunction("deleteButtonClickedCallback", new BrowserFunction() {
+			public JSValue invoke(JSValue... args) {
+
+				System.out.println("Delete " + args[0].getString());
+
+				return JSValue.create("ret");
+			}
+		});
+	}
+
 	/**
 	 * Setter.
 	 * 
 	 * @param controller Controller to be set.
 	 */
 	public void setController(Controller controller){
-		
+
 		this.controller = controller;
 	}
-	
+
 	public void drawPolyline(Polyline polyline){
-		
+
 		browser.executeJavaScriptAndReturnValue("window.drawPolylineByCoordinates(" + polyline.toString() + ");");
 	}
-	
+
 	public void drawMarker(Marker marker){
-		
+
 		browser.executeJavaScriptAndReturnValue("window.drawMarker(" + marker.toString() + ");");
 	}
-	
+
 	public void updateMarker(Marker marker){
 		//TODO: Update marker
 	}
-	
+
 	public void deleteMarker(Marker marker){
-		
+
 		browser.executeJavaScriptAndReturnValue("window.deleteMarker(" + marker.id + ");");
 	}
-	
+
 	public void drawRoute(Route route){
-		
+
 		browser.executeJavaScriptAndReturnValue("window.drawRoute(" + route.toString() + ");");
 	}
-	
+
 	public void deleteRoute(Route route){
-		
+
 		browser.executeJavaScriptAndReturnValue("window.deleteRoute(" + route.id + ");");
 	}
-	
+
 	public void deleteMarkers(){
-		
+
 		browser.executeJavaScriptAndReturnValue("window.deleteMarkers();");
 	}
-	
+
 	public void deleteRoutes(){
-	
+
 		browser.executeJavaScriptAndReturnValue("window.deleteRoutes();");
 	}
-	
+
 	public void deleteAll(){
-		
+
 		browser.executeJavaScriptAndReturnValue("window.deleteAll();");
 	}
 }
