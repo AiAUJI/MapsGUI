@@ -13,6 +13,7 @@ public class Controller {
 
 	GUI gui;
 	
+	//Messages to the GUI
 	public Controller(){
 		
 		this.gui = null;
@@ -66,4 +67,7 @@ public class Controller {
 		
 		gui.deleteAll();
 	}
+	
+	//Messages to the agents
+	
 }

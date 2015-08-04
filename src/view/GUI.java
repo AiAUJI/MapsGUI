@@ -20,6 +20,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+/**
+ * The class that creates the Graphical User Interface
+ *
+ */
 public class GUI {
 
 	Controller controller;

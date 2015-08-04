@@ -17,13 +17,13 @@ import jade.lang.acl.ACLMessage;
  * This is for demo purposes only.
  *
  */
-public class SenderBehaviour extends Behaviour{
+public class DemoBehaviour extends Behaviour{
 
 	private static final long serialVersionUID = -2826285439534419110L;
 
 	private Agent agent;
 
-	public SenderBehaviour(Agent agent){
+	public DemoBehaviour(Agent agent){
 
 		super();
 
