@@ -13,7 +13,6 @@ import jade.lang.acl.UnreadableException;
  * Behaviour that listens for messages and objects from other agents and passes
  * them to the controller to be drawn.
  * 
- * It also sends messages.
  */
 public class APIAgentBehaviour extends Behaviour{
 
@@ -61,7 +60,7 @@ public class APIAgentBehaviour extends Behaviour{
 						
 						//Reply with an error code
 						reply = receivedMessage.createReply();
-						reply.setOntology("NOT OK: The marker you passed was not correct.");
+						reply.setContent("NOT OK: The marker you passed was not correct.");
 						this.agent.send(reply);
 					}
 					
@@ -69,7 +68,7 @@ public class APIAgentBehaviour extends Behaviour{
 					
 					//Reply with a success code
 					reply = receivedMessage.createReply();
-					reply.setOntology("OK");
+					reply.setContent("OK");
 					this.agent.send(reply);
 					
 					break;
@@ -92,7 +91,7 @@ public class APIAgentBehaviour extends Behaviour{
 						
 						//Reply with an error code
 						reply = receivedMessage.createReply();
-						reply.setOntology("NOT OK: The marker you passed was not correct.");
+						reply.setContent("NOT OK: The marker you passed was not correct.");
 						this.agent.send(reply);
 					}
 					
@@ -100,7 +99,7 @@ public class APIAgentBehaviour extends Behaviour{
 					
 					//Reply with a success code
 					reply = receivedMessage.createReply();
-					reply.setOntology("OK");
+					reply.setContent("OK");
 					this.agent.send(reply);
 					
 					break;
@@ -117,7 +116,7 @@ public class APIAgentBehaviour extends Behaviour{
 						
 						//Reply with an error code
 						reply = receivedMessage.createReply();
-						reply.setOntology("NOT OK: The route you passed was not correct.");
+						reply.setContent("NOT OK: The route you passed was not correct.");
 						this.agent.send(reply);
 					}
 					
@@ -125,7 +124,7 @@ public class APIAgentBehaviour extends Behaviour{
 					
 					//Reply with a success code
 					reply = receivedMessage.createReply();
-					reply.setOntology("OK");
+					reply.setContent("OK");
 					this.agent.send(reply);
 					
 					break;
@@ -142,7 +141,7 @@ public class APIAgentBehaviour extends Behaviour{
 						
 						//Reply with an error code
 						reply = receivedMessage.createReply();
-						reply.setOntology("NOT OK: The route you passed was not correct.");
+						reply.setContent("NOT OK: The route you passed was not correct.");
 						this.agent.send(reply);
 					}
 					
@@ -150,7 +149,7 @@ public class APIAgentBehaviour extends Behaviour{
 					
 					//Reply with a success code
 					reply = receivedMessage.createReply();
-					reply.setOntology("OK");
+					reply.setContent("OK");
 					this.agent.send(reply);
 					
 					break;
@@ -167,7 +166,7 @@ public class APIAgentBehaviour extends Behaviour{
 						
 						//Reply with an error code
 						reply = receivedMessage.createReply();
-						reply.setOntology("NOT OK: The polyline you passed was not correct.");
+						reply.setContent("NOT OK: The polyline you passed was not correct.");
 						this.agent.send(reply);
 					}
 					
@@ -175,7 +174,7 @@ public class APIAgentBehaviour extends Behaviour{
 					
 					//Reply with a success code
 					reply = receivedMessage.createReply();
-					reply.setOntology("OK");
+					reply.setContent("OK");
 					this.agent.send(reply);
 					
 					break;
@@ -186,7 +185,7 @@ public class APIAgentBehaviour extends Behaviour{
 					
 					//Reply with a success code
 					reply = receivedMessage.createReply();
-					reply.setOntology("OK");
+					reply.setContent("OK");
 					this.agent.send(reply);
 					
 					break;
@@ -197,7 +196,7 @@ public class APIAgentBehaviour extends Behaviour{
 					
 					//Reply with a success code
 					reply = receivedMessage.createReply();
-					reply.setOntology("OK");
+					reply.setContent("OK");
 					this.agent.send(reply);
 					
 					break;
@@ -208,7 +207,7 @@ public class APIAgentBehaviour extends Behaviour{
 					
 					//Reply with a success code
 					reply = receivedMessage.createReply();
-					reply.setOntology("OK");
+					reply.setContent("OK");
 					this.agent.send(reply);
 					
 					break;
@@ -217,7 +216,7 @@ public class APIAgentBehaviour extends Behaviour{
 					
 					//Reply with an error code
 					reply = receivedMessage.createReply();
-					reply.setOntology("NOT OK: The function doesn't exist. Check your Ontology.");
+					reply.setContent("NOT OK: The function doesn't exist. Check your Ontology.");
 					this.agent.send(reply);
 					
 					break;

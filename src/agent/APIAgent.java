@@ -1,6 +1,7 @@
 package agent;
 
 import jade.core.Agent;
+import jade.wrapper.AgentContainer;
 
 import javax.swing.SwingUtilities;
 
@@ -18,6 +19,10 @@ public class APIAgent extends Agent{
 		
 		final GUI view = new GUI();
 		Controller controller = new Controller();
+		
+		//Get the container
+		AgentContainer container = (AgentContainer) this.getArguments()[0];
+		controller.setContainer(container);
 		
 		//MVC stuff
 		view.setController(controller);

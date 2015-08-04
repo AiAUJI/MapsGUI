@@ -78,9 +78,9 @@ public class DemoBehaviour extends Behaviour{
 
 		if(receivedMessage != null){
 
-			String ontology = receivedMessage.getOntology();
+			String response = receivedMessage.getContent();
 
-			System.out.println("The API server replied with: " + ontology);
+			System.out.println("The API server replied with: " + response);
 		}
 
 		//Police marker
@@ -119,9 +119,9 @@ public class DemoBehaviour extends Behaviour{
 
 		if(receivedMessage != null){
 
-			String ontology = receivedMessage.getOntology();
+			String response = receivedMessage.getContent();
 
-			System.out.println("The API server replied with: " + ontology);
+			System.out.println("The API server replied with: " + response);
 		}
 
 		//Ambulance marker
@@ -160,9 +160,9 @@ public class DemoBehaviour extends Behaviour{
 
 		if(receivedMessage != null){
 
-			String ontology = receivedMessage.getOntology();
+			String response = receivedMessage.getContent();
 
-			System.out.println("The API server replied with: " + ontology);
+			System.out.println("The API server replied with: " + response);
 		}
 
 		//ROUTE
@@ -209,9 +209,9 @@ public class DemoBehaviour extends Behaviour{
 
 		if(receivedMessage != null){
 
-			String ontology = receivedMessage.getOntology();
+			String response = receivedMessage.getContent();
 
-			System.out.println("The API server replied with: " + ontology);
+			System.out.println("The API server replied with: " + response);
 		}
 
 		//Prepare the message
@@ -256,9 +256,9 @@ public class DemoBehaviour extends Behaviour{
 
 		if(receivedMessage != null){
 
-			String ontology = receivedMessage.getOntology();
+			String response = receivedMessage.getContent();
 
-			System.out.println("The API server replied with: " + ontology);
+			System.out.println("The API server replied with: " + response);
 		}
 	}
 

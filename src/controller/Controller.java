@@ -1,5 +1,7 @@
 package controller;
 
+import jade.wrapper.AgentContainer;
+import jade.wrapper.StaleProxyException;
 import view.GUI;
 import model.Marker;
 import model.Polyline;
@@ -12,6 +14,7 @@ import model.Route;
 public class Controller {
 
 	GUI gui;
+	AgentContainer container;
 	
 	//Messages to the GUI
 	public Controller(){
@@ -22,6 +25,11 @@ public class Controller {
 	public void setGUI(GUI gui){
 		
 		this.gui = gui;
+	}
+	
+	public void setContainer(AgentContainer container){
+		
+		this.container = container;
 	}
 	
 	public void drawMarker(Marker marker){
@@ -69,5 +77,14 @@ public class Controller {
 	}
 	
 	//Messages to the agents
-	
+	public void broadcastMessage(String msg){
+		
+		try {
+			
+			this.container.createNewAgent("Sender", "agent.APIResponseAgent", new Object[]{msg}).start();
+		} catch (StaleProxyException e) {
+			
+			e.printStackTrace();
+		}
+	}
 }

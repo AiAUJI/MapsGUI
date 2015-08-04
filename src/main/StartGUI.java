@@ -3,6 +3,7 @@ package main;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
+import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 
@@ -13,7 +14,7 @@ import jade.wrapper.StaleProxyException;
 public class StartGUI {
 
 	public void start(){
-		
+				
 		//Get a hold on JADE runtime
 		Runtime rt = Runtime.instance();
 
@@ -24,7 +25,7 @@ public class StartGUI {
 		Profile profile = new ProfileImpl(null, 1099, null);
 			
 		//Container that will hold the agents
-		jade.wrapper.AgentContainer mainContainer = rt.createMainContainer(profile);
+		AgentContainer mainContainer = rt.createMainContainer(profile);
 		
 		//Start RMA
 		try {
@@ -41,7 +42,7 @@ public class StartGUI {
 		//Create the API Agent
 		try {
 
-			AgentController agent = mainContainer.createNewAgent("GUI", "agent.APIAgent", new Object[0]);
+			AgentController agent = mainContainer.createNewAgent("GUI", "agent.APIAgent", new Object[]{mainContainer});
 			
 			agent.start();
 

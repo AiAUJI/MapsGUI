@@ -151,8 +151,8 @@ public class GUI {
 		browser.registerFunction("markerClickedCallback", new BrowserFunction() {
 			public JSValue invoke(JSValue... args) {
 
-				System.out.println(args[0].getString() + " has been clicked");
-
+				controller.broadcastMessage("Clicked " + args[0].getString());
+				
 				return JSValue.create("ret");
 			}
 		});
@@ -161,7 +161,7 @@ public class GUI {
 		browser.registerFunction("deleteButtonClickedCallback", new BrowserFunction() {
 			public JSValue invoke(JSValue... args) {
 
-				System.out.println("Delete " + args[0].getString());
+				controller.broadcastMessage("Deleted " + args[0].getString());
 
 				return JSValue.create("ret");
 			}
