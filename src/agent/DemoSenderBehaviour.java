@@ -13,17 +13,16 @@ import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
 /**
- * This behaviour sends a Marker, Route and Polyline to the API.
- * This is for demo purposes only.
+ * This behaviour listens to the callbacks that are created when clicking or deleting a marker.
  *
  */
-public class DemoBehaviour extends Behaviour{
+public class DemoSenderBehaviour extends Behaviour{
 
 	private static final long serialVersionUID = -2826285439534419110L;
 
 	private Agent agent;
 
-	public DemoBehaviour(Agent agent){
+	public DemoSenderBehaviour(Agent agent){
 
 		super();
 

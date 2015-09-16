@@ -79,6 +79,7 @@ public class Controller {
 	//Messages to the agents
 	public void broadcastMessage(String msg){
 		
+		//This will create a singleton agent that will notify the interested parties about any event.
 		try {
 			
 			this.container.createNewAgent("Sender", "agent.APIResponseAgent", new Object[]{msg}).start();

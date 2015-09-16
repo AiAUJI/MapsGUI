@@ -55,13 +55,26 @@ public class StartGUI {
 		//Launch the demo agent
 		try {
 
-			AgentController agent = mainContainer.createNewAgent("Demo", "agent.DemoAgent", new Object[0]);
+			AgentController agent = mainContainer.createNewAgent("Demo", "agent.DemoSenderAgent", new Object[0]);
 			
 			agent.start();
 
 		} catch (StaleProxyException e) {
 
 			System.out.println("Error starting the Demo agent");
+			e.printStackTrace();
+		}
+		
+		//Launch the demo listener agent
+		try {
+
+			AgentController agent = mainContainer.createNewAgent("Demo-listener", "agent.DemoListenerAgent", new Object[0]);
+			
+			agent.start();
+
+		} catch (StaleProxyException e) {
+
+			System.out.println("Error starting the Demo-listener agent");
 			e.printStackTrace();
 		}
 	}

@@ -78,7 +78,8 @@ public class APIResponseAgentBehaviour extends Behaviour{
 
 	@Override
 	public boolean done() {
-
+		
+		this.agent.doDelete();
 		return true;
 	}
 }

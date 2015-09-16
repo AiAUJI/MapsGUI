@@ -14,11 +14,6 @@ import model.Polyline;
 import model.Route;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 
 /**
  * The class that creates the Graphical User Interface
@@ -59,85 +54,85 @@ public class GUI {
 
 		//Add the browser
 		main.add(browserView, BorderLayout.CENTER);
-
-		//The button panel
-		JPanel controls = new JPanel();
-		controls.setLayout(new BorderLayout());
-
-		main.add(controls, BorderLayout.EAST);
-
-		//Add the label and the list
-		JPanel routesPanel = new JPanel(new BorderLayout());
-
-		routesPanel.add(new JLabel("Load routes", JLabel.CENTER), BorderLayout.NORTH);
-
-		//Get all .txt files from routes folder
-		String url = GUI.class.getClassLoader().getResource("routes").toString().split(":")[1];
-
-		File[] routes = new File(url).listFiles();
-
-		String listData[] = new String[routes.length];
-
-		for(int i=0; i<routes.length; i++){
-
-			listData[i] = routes[i].getName();
-		}
-
-		// Create a new listbox control
-		JList<String> listbox = new JList<String>(listData);
-		routesPanel.add(listbox, BorderLayout.CENTER);
-
-		controls.add(routesPanel, BorderLayout.NORTH);
-
-		//A new panel for the buttons
-		JPanel buttons = new JPanel(new BorderLayout());
-
-		JButton draw = new JButton("Draw");
-		JButton reset = new JButton("Reset");
-		buttons.add(draw, BorderLayout.WEST);
-		buttons.add(reset, BorderLayout.EAST);
-
-		routesPanel.add(buttons, BorderLayout.SOUTH);
-
-		url = GUI.class.getClassLoader().getResource("html/index.html").toString();
+		
+		String url = GUI.class.getClassLoader().getResource("html/index.html").toString();
 		browser.loadURL(url);
 
-		draw.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//TODO: Improve
-				BufferedReader br;
-
-				//Para cada uno de las rutas seleccionadas
-				for(int i: listbox.getSelectedIndices()){
-
-					//Abrimos el fichero y leemos el contenido
-					String points = "";
-
-					try {
-						br = new BufferedReader(new FileReader(routes[i].getAbsolutePath()));
-						points = br.readLine();
-						br.close();
-
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-					browser.executeJavaScriptAndReturnValue("window.drawRoute(\"" + i + "\", " + points + ");");
-				}
-			}
-		});
-
-		reset.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				deleteAll();
-			}
-		});
+//		//The button panel
+//		JPanel controls = new JPanel();
+//		controls.setLayout(new BorderLayout());
+//
+//		main.add(controls, BorderLayout.EAST);
+//
+//		//Add the label and the list
+//		JPanel routesPanel = new JPanel(new BorderLayout());
+//
+//		routesPanel.add(new JLabel("Load routes", JLabel.CENTER), BorderLayout.NORTH);
+//
+//		//Get all .txt files from routes folder
+//		 url = GUI.class.getClassLoader().getResource("routes").toString().split(":")[1];
+//
+//		File[] routes = new File(url).listFiles();
+//
+//		String listData[] = new String[routes.length];
+//
+//		for(int i=0; i<routes.length; i++){
+//
+//			listData[i] = routes[i].getName();
+//		}
+//
+//		// Create a new listbox control
+//		JList<String> listbox = new JList<String>(listData);
+//		routesPanel.add(listbox, BorderLayout.CENTER);
+//
+//		controls.add(routesPanel, BorderLayout.NORTH);
+//
+//		//A new panel for the buttons
+//		JPanel buttons = new JPanel(new BorderLayout());
+//
+//		JButton draw = new JButton("Draw");
+//		JButton reset = new JButton("Reset");
+//		buttons.add(draw, BorderLayout.WEST);
+//		buttons.add(reset, BorderLayout.EAST);
+//
+//		routesPanel.add(buttons, BorderLayout.SOUTH);
+//
+//		draw.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				//TODO: Improve
+//				BufferedReader br;
+//
+//				//Para cada uno de las rutas seleccionadas
+//				for(int i: listbox.getSelectedIndices()){
+//
+//					//Abrimos el fichero y leemos el contenido
+//					String points = "";
+//
+//					try {
+//						br = new BufferedReader(new FileReader(routes[i].getAbsolutePath()));
+//						points = br.readLine();
+//						br.close();
+//
+//					} catch (Exception e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
+//
+//					browser.executeJavaScriptAndReturnValue("window.drawRoute(\"" + i + "\", " + points + ");");
+//				}
+//			}
+//		});
+//
+//		reset.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//				deleteAll();
+//			}
+//		});
 	}
 
 	/**
