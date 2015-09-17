@@ -112,7 +112,7 @@ public class DemoSenderBehaviour extends Behaviour{
 
 		//Actually send it
 		this.agent.send(message);
-
+		
 		//Wait for the API server response
 		receivedMessage = this.agent.blockingReceive();
 

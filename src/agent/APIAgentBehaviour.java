@@ -47,7 +47,6 @@ public class APIAgentBehaviour extends Behaviour{
 
 			switch(command){
 			
-				//TODO: Success messages
 				case "drawMarker":
 					
 					try {
@@ -75,8 +74,27 @@ public class APIAgentBehaviour extends Behaviour{
 
 				case "updateMarker":
 					
-					//TODO: TODO
-					System.out.println("TODO");
+					try {
+
+						marker = (Marker) receivedMessage.getContentObject();
+					} catch (UnreadableException e) {
+
+						System.out.println("Error receiving the object.");
+						e.printStackTrace();
+						
+						//Reply with an error code
+						reply = receivedMessage.createReply();
+						reply.setContent("NOT OK: The marker you passed was not correct.");
+						this.agent.send(reply);
+					}
+					
+					controller.updateMarker(marker);
+					
+					//Reply with a success code
+					reply = receivedMessage.createReply();
+					reply.setContent("OK");
+					this.agent.send(reply);
+					
 					break;
 					
 				case "deleteMarker":

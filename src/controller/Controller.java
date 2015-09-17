@@ -38,7 +38,9 @@ public class Controller {
 	}
 	
 	public void updateMarker(Marker marker){
-		//TODO: Update marker
+		
+		gui.deleteMarker(marker);
+		gui.drawMarker(marker);
 	}
 	
 	public void deleteMarker(Marker marker){
