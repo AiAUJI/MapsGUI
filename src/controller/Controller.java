@@ -1,6 +1,6 @@
 package controller;
 
-import jade.wrapper.AgentContainer;
+import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
 import view.GUI;
 import model.Marker;
@@ -14,7 +14,7 @@ import model.Route;
 public class Controller {
 
 	GUI gui;
-	AgentContainer container;
+	ContainerController container;
 	
 	//Messages to the GUI
 	public Controller(){
@@ -27,7 +27,7 @@ public class Controller {
 		this.gui = gui;
 	}
 	
-	public void setContainer(AgentContainer container){
+	public void setContainer(ContainerController container){
 		
 		this.container = container;
 	}

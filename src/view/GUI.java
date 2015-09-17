@@ -57,6 +57,23 @@ public class GUI {
 		
 		String url = GUI.class.getClassLoader().getResource("html/index.html").toString();
 		browser.loadURL(url);
+		
+		//Logs panel
+		JPanel logsPanel = new JPanel();
+		logsPanel.setLayout(new BorderLayout());
+		main.add(logsPanel, BorderLayout.EAST);
+		
+		//First log panel
+		JTextArea logOne = new JTextArea(5, 20);
+		JScrollPane logOneScroll = new JScrollPane(logOne); 
+		logOne.setEditable(false);
+		logsPanel.add(logOneScroll, BorderLayout.NORTH);
+		
+		//Second log panel
+		JTextArea logTwo = new JTextArea(5, 20);
+		JScrollPane logTwoScroll = new JScrollPane(logTwo); 
+		logTwo.setEditable(false);
+		logsPanel.add(logTwoScroll, BorderLayout.CENTER);
 
 //		//The button panel
 //		JPanel controls = new JPanel();
