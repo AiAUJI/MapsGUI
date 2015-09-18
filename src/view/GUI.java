@@ -7,6 +7,7 @@ import com.teamdev.jxbrowser.chromium.swing.BrowserView;
 
 import controller.Controller;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import model.Marker;
@@ -14,6 +15,9 @@ import model.Polyline;
 import model.Route;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * The class that creates the Graphical User Interface
@@ -45,111 +49,263 @@ public class GUI {
 		main.setSize(800, 600);
 		main.setLocationRelativeTo(null);
 		main.setVisible(true);
-		main.setLayout(new BorderLayout());
+
+		main.getContentPane().setLayout(new GridBagLayout());
+
+		//Something that has to do with something
+		GridBagConstraints constraintsMainPanel = new GridBagConstraints();
+
+		//TODO CHANGE EVERYTHING
 
 		//Icon and title
 		ImageIcon img = new ImageIcon(GUI.class.getClassLoader().getResource("icon/ujilogo.png"));
 		main.setTitle("Universitat Jaume I");
 		main.setIconImage(img.getImage());
 
+		//Swing voodoo
+		constraintsMainPanel.fill = GridBagConstraints.BOTH;
+		constraintsMainPanel.gridwidth = 2; //Take two columns
+		constraintsMainPanel.gridheight = 2; //Take two rows
+		constraintsMainPanel.weightx = 0.8;
+		constraintsMainPanel.weighty = 0.8;
+		constraintsMainPanel.gridx = 0;
+		constraintsMainPanel.gridy = 0;
+
 		//Add the browser
-		main.add(browserView, BorderLayout.CENTER);
-		
+		main.add(browserView, constraintsMainPanel);
+
+		//URL to be loaded by the browser
 		String url = GUI.class.getClassLoader().getResource("html/index.html").toString();
 		browser.loadURL(url);
-		
+
 		//Logs panel
 		JPanel logsPanel = new JPanel();
-		logsPanel.setLayout(new BorderLayout());
-		main.add(logsPanel, BorderLayout.EAST);
+		logsPanel.setLayout(new GridBagLayout());
 		
+		GridBagConstraints constraintsLogsPanel = new GridBagConstraints();
+
 		//First log panel
-		JTextArea logOne = new JTextArea(5, 20);
+		JPanel logOnePanel = new JPanel();
+		logOnePanel.setLayout(new BorderLayout());
+
+		JLabel logOneTitle = new JLabel("Log 1", SwingConstants.CENTER);
+		logOnePanel.add(logOneTitle, BorderLayout.NORTH);
+
+		JTextArea logOne = new JTextArea(5, 5);
 		JScrollPane logOneScroll = new JScrollPane(logOne); 
 		logOne.setEditable(false);
-		logsPanel.add(logOneScroll, BorderLayout.NORTH);
 		
+		logOnePanel.add(logOneScroll, BorderLayout.CENTER);
+		
+		constraintsLogsPanel.fill = GridBagConstraints.BOTH;
+		constraintsLogsPanel.gridwidth = 1; //Take one column
+		constraintsLogsPanel.gridheight = 1; //Take one row
+		constraintsLogsPanel.weightx = 1;
+		constraintsLogsPanel.weighty = 0.5;
+		constraintsLogsPanel.gridx = 0;
+		constraintsLogsPanel.gridy = 0;
+
+		logsPanel.add(logOnePanel, constraintsLogsPanel);
+
 		//Second log panel
-		JTextArea logTwo = new JTextArea(5, 20);
+		JPanel logTwoPanel = new JPanel();
+		logTwoPanel.setLayout(new BorderLayout());
+
+		JLabel logTwoTitle = new JLabel("Log 2", SwingConstants.CENTER);
+		logTwoPanel.add(logTwoTitle, BorderLayout.NORTH);
+
+		JTextArea logTwo = new JTextArea(5, 5);
 		JScrollPane logTwoScroll = new JScrollPane(logTwo); 
 		logTwo.setEditable(false);
-		logsPanel.add(logTwoScroll, BorderLayout.CENTER);
+		logTwoPanel.add(logTwoScroll, BorderLayout.CENTER);
 
-//		//The button panel
-//		JPanel controls = new JPanel();
-//		controls.setLayout(new BorderLayout());
-//
-//		main.add(controls, BorderLayout.EAST);
-//
-//		//Add the label and the list
-//		JPanel routesPanel = new JPanel(new BorderLayout());
-//
-//		routesPanel.add(new JLabel("Load routes", JLabel.CENTER), BorderLayout.NORTH);
-//
-//		//Get all .txt files from routes folder
-//		 url = GUI.class.getClassLoader().getResource("routes").toString().split(":")[1];
-//
-//		File[] routes = new File(url).listFiles();
-//
-//		String listData[] = new String[routes.length];
-//
-//		for(int i=0; i<routes.length; i++){
-//
-//			listData[i] = routes[i].getName();
-//		}
-//
-//		// Create a new listbox control
-//		JList<String> listbox = new JList<String>(listData);
-//		routesPanel.add(listbox, BorderLayout.CENTER);
-//
-//		controls.add(routesPanel, BorderLayout.NORTH);
-//
-//		//A new panel for the buttons
-//		JPanel buttons = new JPanel(new BorderLayout());
-//
-//		JButton draw = new JButton("Draw");
-//		JButton reset = new JButton("Reset");
-//		buttons.add(draw, BorderLayout.WEST);
-//		buttons.add(reset, BorderLayout.EAST);
-//
-//		routesPanel.add(buttons, BorderLayout.SOUTH);
-//
-//		draw.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				//TODO: Improve
-//				BufferedReader br;
-//
-//				//Para cada uno de las rutas seleccionadas
-//				for(int i: listbox.getSelectedIndices()){
-//
-//					//Abrimos el fichero y leemos el contenido
-//					String points = "";
-//
-//					try {
-//						br = new BufferedReader(new FileReader(routes[i].getAbsolutePath()));
-//						points = br.readLine();
-//						br.close();
-//
-//					} catch (Exception e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
-//
-//					browser.executeJavaScriptAndReturnValue("window.drawRoute(\"" + i + "\", " + points + ");");
-//				}
-//			}
-//		});
-//
-//		reset.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//
-//				deleteAll();
-//			}
-//		});
+		constraintsLogsPanel.fill = GridBagConstraints.BOTH;
+		constraintsLogsPanel.gridwidth = 1; //Take one column
+		constraintsLogsPanel.gridheight = 1; //Take one row
+		constraintsLogsPanel.weightx = 1;
+		constraintsLogsPanel.weighty = 0.5;
+		constraintsLogsPanel.gridx = 0;
+		constraintsLogsPanel.gridy = 1;
+
+		logsPanel.add(logTwoPanel, constraintsLogsPanel);
+		
+		//More swing voodoo
+		constraintsMainPanel.fill = GridBagConstraints.BOTH;
+		constraintsMainPanel.gridwidth = 1; //Take one column
+		constraintsMainPanel.gridheight = 1; //Take one row
+		constraintsMainPanel.weightx = 0.2;
+		constraintsMainPanel.weighty = 0.8;
+		constraintsMainPanel.gridx = 2;
+		constraintsMainPanel.gridy = 0;
+
+		main.add(logsPanel, constraintsMainPanel);
+
+		//Graphs panel
+		JPanel graphsPanel = new JPanel();
+		graphsPanel.setLayout(new GridBagLayout());
+
+		GridBagConstraints constraintsGraphsPanel = new GridBagConstraints();
+		
+		//First graph panel
+		logOnePanel = new JPanel();
+		logOnePanel.setLayout(new BorderLayout());
+
+		logOneTitle = new JLabel("Graph 1", SwingConstants.CENTER);
+		logOnePanel.add(logOneTitle, BorderLayout.NORTH);
+
+		logOne = new JTextArea(5, 20);
+		logOneScroll = new JScrollPane(logOne); 
+		logOne.setEditable(false);
+		logOnePanel.add(logOneScroll, BorderLayout.CENTER);
+		
+		constraintsGraphsPanel.fill = GridBagConstraints.BOTH;
+		constraintsGraphsPanel.gridwidth = 1; //Take one column
+		constraintsGraphsPanel.gridheight = 1; //Take one row
+		constraintsGraphsPanel.weightx = 0.5;
+		constraintsGraphsPanel.weighty = 1;
+		constraintsGraphsPanel.gridx = 0;
+		constraintsGraphsPanel.gridy = 0;
+
+		graphsPanel.add(logOnePanel, constraintsGraphsPanel);
+
+		//Second graph panel
+		logTwoPanel = new JPanel();
+		logTwoPanel.setLayout(new BorderLayout());
+
+		logTwoTitle = new JLabel("Graph 2", SwingConstants.CENTER);
+		logTwoPanel.add(logTwoTitle, BorderLayout.NORTH);
+
+		logTwo = new JTextArea(5, 20);
+		logTwoScroll = new JScrollPane(logTwo); 
+		logTwo.setEditable(false);
+		logTwoPanel.add(logTwoScroll, BorderLayout.CENTER);
+
+		constraintsGraphsPanel.fill = GridBagConstraints.BOTH;
+		constraintsGraphsPanel.gridwidth = 1; //Take one column
+		constraintsGraphsPanel.gridheight = 1; //Take one row
+		constraintsGraphsPanel.weightx = 0.5;
+		constraintsGraphsPanel.weighty = 1;
+		constraintsGraphsPanel.gridx = 1;
+		constraintsGraphsPanel.gridy = 0;
+
+		graphsPanel.add(logTwoPanel, constraintsGraphsPanel);
+		
+		//More swing voodoo
+		constraintsMainPanel.fill = GridBagConstraints.BOTH;
+		constraintsMainPanel.gridwidth = 2; //Take one column
+		constraintsMainPanel.gridheight = 1; //Take one row
+		constraintsMainPanel.weightx = 0.8;
+		constraintsMainPanel.weighty = 0.2;
+		constraintsMainPanel.gridx = 0;
+		constraintsMainPanel.gridy = 2;
+
+		main.add(graphsPanel, constraintsMainPanel);
+
+		//Big UJI logo
+		BufferedImage myPicture = null;
+
+		try {
+			myPicture = ImageIO.read(new File(GUI.class.getClassLoader().getResource("icon/ujilogogrande.png").getPath()));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if(null != myPicture){
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture), JLabel.CENTER);
+
+			//Even more swing voodoo
+			constraintsMainPanel.fill = GridBagConstraints.BOTH;
+			constraintsMainPanel.gridwidth = 1; //Take one column
+			constraintsMainPanel.gridheight = 1; //Take one row
+			constraintsMainPanel.weightx = 0.2;
+			constraintsMainPanel.weighty = 0.2;
+			constraintsMainPanel.gridx = 2;
+			constraintsMainPanel.gridy = 2;
+			
+			picLabel.setPreferredSize(new Dimension(80, 80));
+
+			main.add(picLabel, constraintsMainPanel);
+		}
+
+		//Panel to hold logs and graphs panels
+		//rightPanel.add(graphsPanel, BorderLayout.EAST);
+
+		//		//The button panel
+		//		JPanel controls = new JPanel();
+		//		controls.setLayout(new BorderLayout());
+		//
+		//		main.add(controls, BorderLayout.EAST);
+		//
+		//		//Add the label and the list
+		//		JPanel routesPanel = new JPanel(new BorderLayout());
+		//
+		//		routesPanel.add(new JLabel("Load routes", JLabel.CENTER), BorderLayout.NORTH);
+		//
+		//		//Get all .txt files from routes folder
+		//		 url = GUI.class.getClassLoader().getResource("routes").toString().split(":")[1];
+		//
+		//		File[] routes = new File(url).listFiles();
+		//
+		//		String listData[] = new String[routes.length];
+		//
+		//		for(int i=0; i<routes.length; i++){
+		//
+		//			listData[i] = routes[i].getName();
+		//		}
+		//
+		//		// Create a new listbox control
+		//		JList<String> listbox = new JList<String>(listData);
+		//		routesPanel.add(listbox, BorderLayout.CENTER);
+		//
+		//		controls.add(routesPanel, BorderLayout.NORTH);
+		//
+		//		//A new panel for the buttons
+		//		JPanel buttons = new JPanel(new BorderLayout());
+		//
+		//		JButton draw = new JButton("Draw");
+		//		JButton reset = new JButton("Reset");
+		//		buttons.add(draw, BorderLayout.WEST);
+		//		buttons.add(reset, BorderLayout.EAST);
+		//
+		//		routesPanel.add(buttons, BorderLayout.SOUTH);
+		//
+		//		draw.addActionListener(new ActionListener() {
+		//
+		//			@Override
+		//			public void actionPerformed(ActionEvent e) {
+		//				//TODO: Improve
+		//				BufferedReader br;
+		//
+		//				//Para cada uno de las rutas seleccionadas
+		//				for(int i: listbox.getSelectedIndices()){
+		//
+		//					//Abrimos el fichero y leemos el contenido
+		//					String points = "";
+		//
+		//					try {
+		//						br = new BufferedReader(new FileReader(routes[i].getAbsolutePath()));
+		//						points = br.readLine();
+		//						br.close();
+		//
+		//					} catch (Exception e1) {
+		//						// TODO Auto-generated catch block
+		//						e1.printStackTrace();
+		//					}
+		//
+		//					browser.executeJavaScriptAndReturnValue("window.drawRoute(\"" + i + "\", " + points + ");");
+		//				}
+		//			}
+		//		});
+		//
+		//		reset.addActionListener(new ActionListener() {
+		//
+		//			@Override
+		//			public void actionPerformed(ActionEvent e) {
+		//
+		//				deleteAll();
+		//			}
+		//		});
 	}
 
 	/**
@@ -164,11 +320,11 @@ public class GUI {
 			public JSValue invoke(JSValue... args) {
 
 				controller.broadcastMessage("Clicked " + args[0].getString());
-				
+
 				return JSValue.create("ret");
 			}
 		});
-		
+
 		//Triggered when the delete button in a marker is clicked
 		browser.registerFunction("deleteButtonClickedCallback", new BrowserFunction() {
 			public JSValue invoke(JSValue... args) {
