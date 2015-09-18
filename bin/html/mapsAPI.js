@@ -34,7 +34,12 @@ function initialize() {
 //information: (Optional) Information to display when the marker is clicked.
 //icon: (Optional) URL to the icon to be displayed.
 function drawMarker(id, coordinates, name, information, icon){
-
+	
+	if(id in markersDictionary){
+		
+		deleteMarker(id);
+	}
+	
 	icon = icon || 'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
 	information = information || "";
 
@@ -217,6 +222,7 @@ function deleteMarker(id){
 	
 	markersDictionary[id].setMap(null);
 	markersDictionary[id] = undefined;
+	delete markersDictionary[id];
 }
 
 //Function to delete a route given the id
@@ -231,6 +237,7 @@ function deleteRoute(id){
 	}
 	
 	routesDictionary[id] = undefined;
+	delete routesDictionary[id];
 }
 
 //Function to remove all the drawn stuff

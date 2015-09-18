@@ -39,7 +39,6 @@ public class Controller {
 	
 	public void updateMarker(Marker marker){
 		
-		gui.deleteMarker(marker);
 		gui.drawMarker(marker);
 	}
 	

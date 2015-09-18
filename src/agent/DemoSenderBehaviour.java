@@ -139,7 +139,7 @@ public class DemoSenderBehaviour extends Behaviour{
 
 			System.out.println("The API server replied with: " + response);
 		}
-
+		
 		//Send string to the logs
 		message.setOntology("addStringToLog1");
 		message.setContent("Added the Police.");
@@ -329,7 +329,7 @@ public class DemoSenderBehaviour extends Behaviour{
 
 		//Send string to the logs
 		message.setOntology("addStringToLog2");
-		message.setContent("Added second route.");
+		message.setContent("Added TriForce, because is dangerous to go alone.");
 
 		//Actually send it
 		this.agent.send(message);
