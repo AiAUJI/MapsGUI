@@ -90,4 +90,15 @@ public class Controller {
 			e.printStackTrace();
 		}
 	}
+	
+	//Logs function
+	public void addStringLogs1(String string){
+		
+		this.gui.addStringLogs1(string);;
+	}
+		
+	public void addStringLogs2(String string){
+		
+		this.gui.addStringLogs2(string);;
+	}
 }

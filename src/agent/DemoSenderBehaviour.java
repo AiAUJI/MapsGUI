@@ -82,6 +82,23 @@ public class DemoSenderBehaviour extends Behaviour{
 			System.out.println("The API server replied with: " + response);
 		}
 
+		//Send string to the logs
+		message.setOntology("addStringToLog1");
+		message.setContent("Added the regular marker.");
+
+		//Actually send it
+		this.agent.send(message);
+
+		//Wait for the API server response
+		receivedMessage = this.agent.blockingReceive();
+
+		if(receivedMessage != null){
+
+			String response = receivedMessage.getContent();
+
+			System.out.println("The API server replied with: " + response);
+		}
+
 		//Police marker
 
 		//Prepare the message
@@ -112,7 +129,24 @@ public class DemoSenderBehaviour extends Behaviour{
 
 		//Actually send it
 		this.agent.send(message);
-		
+
+		//Wait for the API server response
+		receivedMessage = this.agent.blockingReceive();
+
+		if(receivedMessage != null){
+
+			String response = receivedMessage.getContent();
+
+			System.out.println("The API server replied with: " + response);
+		}
+
+		//Send string to the logs
+		message.setOntology("addStringToLog1");
+		message.setContent("Added the Police.");
+
+		//Actually send it
+		this.agent.send(message);
+
 		//Wait for the API server response
 		receivedMessage = this.agent.blockingReceive();
 
@@ -150,6 +184,23 @@ public class DemoSenderBehaviour extends Behaviour{
 
 		//Sets the agent to send by name
 		message.addReceiver( new AID( "GUI", AID.ISLOCALNAME) );
+
+		//Actually send it
+		this.agent.send(message);
+
+		//Wait for the API server response
+		receivedMessage = this.agent.blockingReceive();
+
+		if(receivedMessage != null){
+
+			String response = receivedMessage.getContent();
+
+			System.out.println("The API server replied with: " + response);
+		}
+
+		//Send string to the logs
+		message.setOntology("addStringToLog1");
+		message.setContent("Added the Ambulance marker.");
 
 		//Actually send it
 		this.agent.send(message);
@@ -202,6 +253,22 @@ public class DemoSenderBehaviour extends Behaviour{
 		//Actually send it
 		this.agent.send(message);
 
+		//Wait for the API server response
+		receivedMessage = this.agent.blockingReceive();
+
+		if(receivedMessage != null){
+
+			String response = receivedMessage.getContent();
+
+			System.out.println("The API server replied with: " + response);
+		}
+
+		//Send string to the logs
+		message.setOntology("addStringToLog2");
+		message.setContent("Added first route.");
+
+		//Actually send it
+		this.agent.send(message);
 
 		//Wait for the API server response
 		receivedMessage = this.agent.blockingReceive();
@@ -246,6 +313,23 @@ public class DemoSenderBehaviour extends Behaviour{
 
 		//Sets the agent to send by name
 		message.addReceiver( new AID( "GUI", AID.ISLOCALNAME) );
+
+		//Actually send it
+		this.agent.send(message);
+
+		//Wait for the API server response
+		receivedMessage = this.agent.blockingReceive();
+
+		if(receivedMessage != null){
+
+			String response = receivedMessage.getContent();
+
+			System.out.println("The API server replied with: " + response);
+		}
+
+		//Send string to the logs
+		message.setOntology("addStringToLog2");
+		message.setContent("Added second route.");
 
 		//Actually send it
 		this.agent.send(message);

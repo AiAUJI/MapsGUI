@@ -229,6 +229,32 @@ public class APIAgentBehaviour extends Behaviour{
 					this.agent.send(reply);
 					
 					break;
+					
+				case "addStringToLog1":
+					
+					String string1 = receivedMessage.getContent();
+					
+					controller.addStringLogs1(string1);
+					
+					//Reply with a success code
+					reply = receivedMessage.createReply();
+					reply.setContent("OK");
+					this.agent.send(reply);
+					
+					break;
+					
+				case "addStringToLog2":
+					
+					String string2 = receivedMessage.getContent();
+					
+					controller.addStringLogs2(string2);
+					
+					//Reply with a success code
+					reply = receivedMessage.createReply();
+					reply.setContent("OK");
+					this.agent.send(reply);
+					
+					break;
 										
 				default:
 					

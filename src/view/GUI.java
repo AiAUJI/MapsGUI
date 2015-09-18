@@ -27,14 +27,18 @@ public class GUI {
 
 	Controller controller;
 	Browser browser;
+	JTextArea logs1;
+	JTextArea logs2;
 
 	/**
 	 * Default constructor.
 	 */
 	public GUI(){
-
+		
 		this.controller = null;
 		this.browser = new Browser();
+		this.logs1 = null;
+		this.logs2 = null;
 
 		addCallbackFunctions(browser);
 	}
@@ -91,9 +95,9 @@ public class GUI {
 		JLabel logOneTitle = new JLabel("Log 1", SwingConstants.CENTER);
 		logOnePanel.add(logOneTitle, BorderLayout.NORTH);
 
-		JTextArea logOne = new JTextArea(5, 5);
-		JScrollPane logOneScroll = new JScrollPane(logOne); 
-		logOne.setEditable(false);
+		this.logs1 = new JTextArea(5, 5);
+		JScrollPane logOneScroll = new JScrollPane(this.logs1); 
+		this.logs1.setEditable(false);
 		
 		logOnePanel.add(logOneScroll, BorderLayout.CENTER);
 		
@@ -114,9 +118,9 @@ public class GUI {
 		JLabel logTwoTitle = new JLabel("Log 2", SwingConstants.CENTER);
 		logTwoPanel.add(logTwoTitle, BorderLayout.NORTH);
 
-		JTextArea logTwo = new JTextArea(5, 5);
-		JScrollPane logTwoScroll = new JScrollPane(logTwo); 
-		logTwo.setEditable(false);
+		this.logs2 = new JTextArea(5, 5);
+		JScrollPane logTwoScroll = new JScrollPane(this.logs2); 
+		this.logs2.setEditable(false);
 		logTwoPanel.add(logTwoScroll, BorderLayout.CENTER);
 
 		constraintsLogsPanel.fill = GridBagConstraints.BOTH;
@@ -153,7 +157,7 @@ public class GUI {
 		logOneTitle = new JLabel("Graph 1", SwingConstants.CENTER);
 		logOnePanel.add(logOneTitle, BorderLayout.NORTH);
 
-		logOne = new JTextArea(5, 20);
+		JTextArea logOne = new JTextArea(5, 20);
 		logOneScroll = new JScrollPane(logOne); 
 		logOne.setEditable(false);
 		logOnePanel.add(logOneScroll, BorderLayout.CENTER);
@@ -175,7 +179,7 @@ public class GUI {
 		logTwoTitle = new JLabel("Graph 2", SwingConstants.CENTER);
 		logTwoPanel.add(logTwoTitle, BorderLayout.NORTH);
 
-		logTwo = new JTextArea(5, 20);
+		JTextArea logTwo = new JTextArea(5, 20);
 		logTwoScroll = new JScrollPane(logTwo); 
 		logTwo.setEditable(false);
 		logTwoPanel.add(logTwoScroll, BorderLayout.CENTER);
@@ -227,85 +231,44 @@ public class GUI {
 
 			main.add(picLabel, constraintsMainPanel);
 		}
+	}
+	
+	/**
+	 * This method adds a string to the logs 1 in the GUI.
+	 * 
+	 * @param string String to be added.
+	 */
+	
+	public void addStringLogs1(String string){
+		
+		String text = this.logs1.getText();
 
-		//Panel to hold logs and graphs panels
-		//rightPanel.add(graphsPanel, BorderLayout.EAST);
-
-		//		//The button panel
-		//		JPanel controls = new JPanel();
-		//		controls.setLayout(new BorderLayout());
-		//
-		//		main.add(controls, BorderLayout.EAST);
-		//
-		//		//Add the label and the list
-		//		JPanel routesPanel = new JPanel(new BorderLayout());
-		//
-		//		routesPanel.add(new JLabel("Load routes", JLabel.CENTER), BorderLayout.NORTH);
-		//
-		//		//Get all .txt files from routes folder
-		//		 url = GUI.class.getClassLoader().getResource("routes").toString().split(":")[1];
-		//
-		//		File[] routes = new File(url).listFiles();
-		//
-		//		String listData[] = new String[routes.length];
-		//
-		//		for(int i=0; i<routes.length; i++){
-		//
-		//			listData[i] = routes[i].getName();
-		//		}
-		//
-		//		// Create a new listbox control
-		//		JList<String> listbox = new JList<String>(listData);
-		//		routesPanel.add(listbox, BorderLayout.CENTER);
-		//
-		//		controls.add(routesPanel, BorderLayout.NORTH);
-		//
-		//		//A new panel for the buttons
-		//		JPanel buttons = new JPanel(new BorderLayout());
-		//
-		//		JButton draw = new JButton("Draw");
-		//		JButton reset = new JButton("Reset");
-		//		buttons.add(draw, BorderLayout.WEST);
-		//		buttons.add(reset, BorderLayout.EAST);
-		//
-		//		routesPanel.add(buttons, BorderLayout.SOUTH);
-		//
-		//		draw.addActionListener(new ActionListener() {
-		//
-		//			@Override
-		//			public void actionPerformed(ActionEvent e) {
-		//				//TODO: Improve
-		//				BufferedReader br;
-		//
-		//				//Para cada uno de las rutas seleccionadas
-		//				for(int i: listbox.getSelectedIndices()){
-		//
-		//					//Abrimos el fichero y leemos el contenido
-		//					String points = "";
-		//
-		//					try {
-		//						br = new BufferedReader(new FileReader(routes[i].getAbsolutePath()));
-		//						points = br.readLine();
-		//						br.close();
-		//
-		//					} catch (Exception e1) {
-		//						// TODO Auto-generated catch block
-		//						e1.printStackTrace();
-		//					}
-		//
-		//					browser.executeJavaScriptAndReturnValue("window.drawRoute(\"" + i + "\", " + points + ");");
-		//				}
-		//			}
-		//		});
-		//
-		//		reset.addActionListener(new ActionListener() {
-		//
-		//			@Override
-		//			public void actionPerformed(ActionEvent e) {
-		//
-		//				deleteAll();
-		//			}
-		//		});
+		if(text.isEmpty()){
+		
+			this.logs1.setText(string);
+		} else {
+			
+			this.logs1.setText(text + '\n' + string);
+		}
+	}
+	
+	/**
+	 * This method adds a string to the logs 2 in the GUI.
+	 * 
+	 * @param string String to be added.
+	 */
+	
+	public void addStringLogs2(String string){
+		
+		String text = this.logs2.getText();
+		
+		if(text.isEmpty()){
+		
+			this.logs2.setText(string);
+		} else {
+			
+			this.logs2.setText(text + '\n' + string);
+		}
 	}
 
 	/**
