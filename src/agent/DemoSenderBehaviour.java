@@ -2,8 +2,11 @@ package agent;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import model.Graph;
 import model.Marker;
 import model.Polyline;
 import model.Route;
@@ -139,7 +142,7 @@ public class DemoSenderBehaviour extends Behaviour{
 
 			System.out.println("The API server replied with: " + response);
 		}
-		
+
 		//Send string to the logs
 		message.setOntology("addStringToLog1");
 		message.setContent("Added the Police.");
@@ -330,6 +333,107 @@ public class DemoSenderBehaviour extends Behaviour{
 		//Send string to the logs
 		message.setOntology("addStringToLog2");
 		message.setContent("Added TriForce, because is dangerous to go alone.");
+
+		//Actually send it
+		this.agent.send(message);
+
+		//Wait for the API server response
+		receivedMessage = this.agent.blockingReceive();
+
+		if(receivedMessage != null){
+
+			String response = receivedMessage.getContent();
+
+			System.out.println("The API server replied with: " + response);
+		}
+
+		//Graph stuff
+		//Graph one
+		Map<String, Double> data = new HashMap<String, Double>();
+
+		data.put("Area 0", Math.random());
+		data.put("Area 1", Math.random());
+		data.put("Area 2", Math.random());
+		data.put("Area 3", Math.random());
+		data.put("Area 4", Math.random());
+		data.put("Area 5", Math.random());
+		data.put("Area 6", Math.random());
+		data.put("Area 7", Math.random());
+		data.put("Area 8", Math.random());
+		data.put("Area 9", Math.random());
+		data.put("Area 10", Math.random());
+
+		Graph graphData = new Graph(data);
+		
+		//Prepare the message
+		message = new ACLMessage(ACLMessage.INFORM);
+
+		//The Ontology is used to choose the function.
+		message.setOntology("updateChartOne");
+
+		System.out.println("SENDING DICT");
+		//Set the object to send
+		try {
+
+			message.setContentObject(graphData);
+		} catch (IOException e) {
+
+			System.out.println("Error trying to serialize the object.");
+			e.printStackTrace();
+		}
+
+		//Sets the agent to send by name
+		message.addReceiver( new AID( "GUI", AID.ISLOCALNAME) );
+
+		//Actually send it
+		this.agent.send(message);
+
+		//Wait for the API server response
+		receivedMessage = this.agent.blockingReceive();
+
+		if(receivedMessage != null){
+
+			String response = receivedMessage.getContent();
+
+			System.out.println("The API server replied with: " + response);
+		}
+		
+		//Graph two
+		data = new HashMap<String, Double>();
+
+		data.put("Area 0", Math.random());
+		data.put("Area 1", Math.random());
+		data.put("Area 2", Math.random());
+		data.put("Area 3", Math.random());
+		data.put("Area 4", Math.random());
+		data.put("Area 5", Math.random());
+		data.put("Area 6", Math.random());
+		data.put("Area 7", Math.random());
+		data.put("Area 8", Math.random());
+		data.put("Area 9", Math.random());
+		data.put("Area 10", Math.random());
+
+		graphData = new Graph(data);
+		
+		//Prepare the message
+		message = new ACLMessage(ACLMessage.INFORM);
+
+		//The Ontology is used to choose the function.
+		message.setOntology("updateChartTwo");
+
+		System.out.println("SENDING DICT");
+		//Set the object to send
+		try {
+
+			message.setContentObject(graphData);
+		} catch (IOException e) {
+
+			System.out.println("Error trying to serialize the object.");
+			e.printStackTrace();
+		}
+
+		//Sets the agent to send by name
+		message.addReceiver( new AID( "GUI", AID.ISLOCALNAME) );
 
 		//Actually send it
 		this.agent.send(message);

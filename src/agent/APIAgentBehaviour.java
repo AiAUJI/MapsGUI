@@ -1,8 +1,12 @@
 package agent;
 
+import model.Graph;
 import model.Marker;
 import model.Polyline;
 import model.Route;
+
+import java.util.Map;
+
 import controller.Controller;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
@@ -43,6 +47,7 @@ public class APIAgentBehaviour extends Behaviour{
 			Marker marker = null;
 			Route route = null;
 			Polyline polyline = null;
+			Graph graphData = null;
 			ACLMessage reply;
 
 			switch(command){
@@ -248,6 +253,56 @@ public class APIAgentBehaviour extends Behaviour{
 					String string2 = receivedMessage.getContent();
 					
 					controller.addStringLogs2(string2);
+					
+					//Reply with a success code
+					reply = receivedMessage.createReply();
+					reply.setContent("OK");
+					this.agent.send(reply);
+					
+					break;
+					
+				case "updateChartOne":
+														
+					try {
+
+						graphData = (Graph) receivedMessage.getContentObject();
+					} catch (UnreadableException e) {
+
+						System.out.println("Error receiving the object.");
+						e.printStackTrace();
+						
+						//Reply with an error code
+						reply = receivedMessage.createReply();
+						reply.setContent("NOT OK: The dictionary you passed was not correct.");
+						this.agent.send(reply);
+					}
+										
+					controller.updateChartOne(graphData.data);
+					
+					//Reply with a success code
+					reply = receivedMessage.createReply();
+					reply.setContent("OK");
+					this.agent.send(reply);
+					
+					break;
+					
+				case "updateChartTwo":
+									
+					try {
+
+						graphData = (Graph) receivedMessage.getContentObject();
+					} catch (UnreadableException e) {
+
+						System.out.println("Error receiving the object.");
+						e.printStackTrace();
+						
+						//Reply with an error code
+						reply = receivedMessage.createReply();
+						reply.setContent("NOT OK: The dictionary you passed was not correct.");
+						this.agent.send(reply);
+					}
+					
+					controller.updateChartTwo(graphData.data);
 					
 					//Reply with a success code
 					reply = receivedMessage.createReply();

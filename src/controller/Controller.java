@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Map;
+
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
 import view.GUI;
@@ -93,11 +95,22 @@ public class Controller {
 	//Logs function
 	public void addStringLogs1(String string){
 		
-		this.gui.addStringLogs1(string);;
+		this.gui.addStringLogs1(string);
 	}
 		
 	public void addStringLogs2(String string){
 		
-		this.gui.addStringLogs2(string);;
+		this.gui.addStringLogs2(string);
+	}
+	
+	//Charts functions
+	public void updateChartOne(Map<String, Double> data){
+		
+		this.gui.updateChartOne(data);
+	}
+
+	public void updateChartTwo(Map<String, Double> data){
+		
+		this.gui.updateChartTwo(data);
 	}
 }

@@ -18,6 +18,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The class that creates the Graphical User Interface
@@ -29,6 +31,8 @@ public class GUI {
 	Browser browser;
 	JTextArea logs1;
 	JTextArea logs2;
+	JPanel graphOnePanel;
+	JPanel graphTwoPanel;
 
 	/**
 	 * Default constructor.
@@ -58,8 +62,6 @@ public class GUI {
 
 		//Something that has to do with something
 		GridBagConstraints constraintsMainPanel = new GridBagConstraints();
-
-		//TODO CHANGE EVERYTHING
 
 		//Icon and title
 		ImageIcon img = new ImageIcon(GUI.class.getClassLoader().getResource("icon/ujilogo.png"));
@@ -151,16 +153,16 @@ public class GUI {
 		GridBagConstraints constraintsGraphsPanel = new GridBagConstraints();
 		
 		//First graph panel
-		logOnePanel = new JPanel();
-		logOnePanel.setLayout(new BorderLayout());
+		graphOnePanel = new JPanel();
+		graphOnePanel.setLayout(new BorderLayout());
 
-		logOneTitle = new JLabel("Graph 1", SwingConstants.CENTER);
-		logOnePanel.add(logOneTitle, BorderLayout.NORTH);
+		JLabel graphOneTitle = new JLabel("Graph 1", SwingConstants.CENTER);
+		graphOnePanel.add(graphOneTitle, BorderLayout.NORTH);
 
-		JTextArea logOne = new JTextArea(5, 20);
-		logOneScroll = new JScrollPane(logOne); 
-		logOne.setEditable(false);
-		logOnePanel.add(logOneScroll, BorderLayout.CENTER);
+		//Add the chart	
+		BarChart barChartOne = new BarChart(new HashMap<String, Double>());
+		
+		graphOnePanel.add(barChartOne.getContentPane(), BorderLayout.CENTER);
 		
 		constraintsGraphsPanel.fill = GridBagConstraints.BOTH;
 		constraintsGraphsPanel.gridwidth = 1; //Take one column
@@ -170,20 +172,19 @@ public class GUI {
 		constraintsGraphsPanel.gridx = 0;
 		constraintsGraphsPanel.gridy = 0;
 
-		graphsPanel.add(logOnePanel, constraintsGraphsPanel);
+		graphsPanel.add(graphOnePanel, constraintsGraphsPanel);
 
 		//Second graph panel
-		logTwoPanel = new JPanel();
-		logTwoPanel.setLayout(new BorderLayout());
+		graphTwoPanel = new JPanel();
+		graphTwoPanel.setLayout(new BorderLayout());
 
-		logTwoTitle = new JLabel("Graph 2", SwingConstants.CENTER);
-		logTwoPanel.add(logTwoTitle, BorderLayout.NORTH);
-
-		JTextArea logTwo = new JTextArea(5, 20);
-		logTwoScroll = new JScrollPane(logTwo); 
-		logTwo.setEditable(false);
-		logTwoPanel.add(logTwoScroll, BorderLayout.CENTER);
-
+		JLabel graphTwoTitle = new JLabel("Graph 2", SwingConstants.CENTER);
+		graphTwoPanel.add(graphTwoTitle, BorderLayout.NORTH);
+		
+		BarChart barChartTwo = new BarChart(new HashMap<String, Double>());
+		
+		graphTwoPanel.add(barChartTwo.getContentPane(), BorderLayout.CENTER);
+		
 		constraintsGraphsPanel.fill = GridBagConstraints.BOTH;
 		constraintsGraphsPanel.gridwidth = 1; //Take one column
 		constraintsGraphsPanel.gridheight = 1; //Take one row
@@ -192,7 +193,7 @@ public class GUI {
 		constraintsGraphsPanel.gridx = 1;
 		constraintsGraphsPanel.gridy = 0;
 
-		graphsPanel.add(logTwoPanel, constraintsGraphsPanel);
+		graphsPanel.add(graphTwoPanel, constraintsGraphsPanel);
 		
 		//More swing voodoo
 		constraintsMainPanel.fill = GridBagConstraints.BOTH;
@@ -234,11 +235,42 @@ public class GUI {
 	}
 	
 	/**
+	 * This method updates the data shown in Chart 1
+	 * 
+	 * @param data New data to be displayed
+	 */
+	public void updateChartOne(Map<String, Double> data){
+		
+		BorderLayout layout = (BorderLayout) this.graphOnePanel.getLayout();
+		this.graphOnePanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+
+		this.graphOnePanel.add(new BarChart(data).getContentPane(), BorderLayout.CENTER);
+		
+		this.graphOnePanel.revalidate();
+		this.graphOnePanel.repaint();
+	}
+	
+	/**
+	 * This method updates the data shown in Chart 2
+	 * 
+	 * @param data New data to be displayed
+	 */
+	public void updateChartTwo(Map<String, Double> data){
+		
+		BorderLayout layout = (BorderLayout) this.graphTwoPanel.getLayout();
+		this.graphTwoPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+
+		this.graphTwoPanel.add(new BarChart(data).getContentPane(), BorderLayout.CENTER);
+		
+		this.graphTwoPanel.revalidate();
+		this.graphTwoPanel.repaint();
+	}
+	
+	/**
 	 * This method adds a string to the logs 1 in the GUI.
 	 * 
 	 * @param string String to be added.
 	 */
-	
 	public void addStringLogs1(String string){
 		
 		String text = this.logs1.getText();
@@ -248,7 +280,7 @@ public class GUI {
 			this.logs1.setText(string);
 		} else {
 			
-			this.logs1.setText(text + '\n' + string);
+			this.logs1.setText(string + '\n' + text);
 		}
 	}
 	
@@ -267,7 +299,7 @@ public class GUI {
 			this.logs2.setText(string);
 		} else {
 			
-			this.logs2.setText(text + '\n' + string);
+			this.logs2.setText(string + '\n' + text);
 		}
 	}
 
